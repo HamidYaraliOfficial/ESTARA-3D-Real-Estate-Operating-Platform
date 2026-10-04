@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: estara
+  namespace: estara
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: estara.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend: {service: {name: estara-api, port: {number: 80}}}
+          - path: /
+            pathType: Prefix
+            backend: {service: {name: estara-web, port: {number: 80}}}

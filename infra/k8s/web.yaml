@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estara-web
+  namespace: estara
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: estara-web}
+  template:
+    metadata: {labels: {app: estara-web}}
+    spec:
+      containers:
+        - name: web
+          image: estara/web:latest
+          ports: [{containerPort: 3000}]
+          readinessProbe: {httpGet: {path: /en, port: 3000}, initialDelaySeconds: 10}
+          livenessProbe: {httpGet: {path: /en, port: 3000}, initialDelaySeconds: 20}
+          resources: {requests: {cpu: 100m, memory: 256Mi}, limits: {cpu: 1, memory: 1Gi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: estara-web
+  namespace: estara
+spec:
+  selector: {app: estara-web}
+  ports: [{port: 80, targetPort: 3000}]

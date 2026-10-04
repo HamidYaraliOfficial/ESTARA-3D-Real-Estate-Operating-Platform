@@ -1,0 +1,4 @@
+'use client';
+import {useEffect,useRef} from 'react'; import gsap from 'gsap'; import {ScrollTrigger} from 'gsap/ScrollTrigger'; import Lenis from 'lenis';
+gsap.registerPlugin(ScrollTrigger);
+export function ScrollStory(){const root=useRef<HTMLDivElement>(null); useEffect(()=>{const lenis=new Lenis({duration:1.15,smoothWheel:true}); const loop=(time:number)=>{lenis.raf(time*1000); requestAnimationFrame(loop)}; const raf=requestAnimationFrame(loop); const ctx=gsap.context(()=>{document.querySelectorAll('[data-story]').forEach((el,i)=>gsap.fromTo(el,{y:70,opacity:0,rotateX:8},{y:0,opacity:1,rotateX:0,ease:'none',scrollTrigger:{trigger:el,start:'top 88%',end:'top 48%',scrub:true}})); ScrollTrigger.refresh();},root); return()=>{cancelAnimationFrame(raf);ctx.revert();lenis.destroy();}},[]); return <div ref={root} className="pointer-events-none absolute inset-x-0 top-0 min-h-[280vh]">{[0,1,2,3].map(i=><div key={i} data-story className="h-[70vh]"/> )}</div>}

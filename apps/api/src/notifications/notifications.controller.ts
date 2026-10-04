@@ -1,0 +1,2 @@
+import {Controller,Get,Headers,Param,Patch,Query} from '@nestjs/common'; import {NotificationsService} from './notifications.service';
+@Controller('notifications') export class NotificationsController {constructor(private readonly s:NotificationsService){} @Get() list(@Headers('x-user-id') uid?:string){return this.s.list(uid||'');} @Patch(':id/read') read(@Param('id') id:string,@Headers('x-user-id') uid?:string){return this.s.read(id,uid||'');}}

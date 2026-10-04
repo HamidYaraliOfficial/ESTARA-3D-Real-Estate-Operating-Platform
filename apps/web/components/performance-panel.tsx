@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useState} from 'react';
+export function PerformancePanel(){const [fps,setFps]=useState(0);const [memory,setMemory]=useState<number>();useEffect(()=>{let frames=0;let last=performance.now();let raf=0;const loop=(now:number)=>{frames++;if(now-last>=1000){setFps(frames);frames=0;last=now;const m=(performance as any).memory;if(m)setMemory(Math.round(m.usedJSHeapSize/1048576));}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop);return()=>cancelAnimationFrame(raf)},[]);return <div className="fixed bottom-4 right-4 z-40 rounded-xl border bg-black/75 px-3 py-2 font-mono text-[10px] text-white">FPS {fps} {memory?`· ${memory}MB`:''}</div>}

@@ -1,0 +1,7 @@
+{
+  "name":"@estara/api","version":"1.0.0","private":true,
+  "scripts":{"dev":"nest start --watch","build":"nest build","start":"node dist/main.js","lint":"eslint .","typecheck":"tsc --noEmit","test":"jest --runInBand","prisma":"prisma"},
+  "dependencies":{"@nestjs/common":"^11.1.6","@nestjs/core":"^11.1.6","@nestjs/config":"^4.0.2","@nestjs/swagger":"^11.2.1","@prisma/client":"^6.15.0","argon2":"^0.44.0","class-transformer":"^0.5.1","class-validator":"^0.14.2","cookie-parser":"^1.4.7","ioredis":"^5.7.0","jose":"^6.1.0","zod":"^4.1.5"},
+  "devDependencies":{"@nestjs/cli":"^11.0.10","@nestjs/schematics":"^11.0.7","@nestjs/testing":"^11.1.6","@types/cookie-parser":"^1.4.10","@types/jest":"^30.0.0","prisma":"^6.15.0","ts-jest":"^29.4.3","ts-node":"^10.9.2","typescript":"^5.9.2"},
+  "prisma":{"seed":"tsx prisma/seed.ts"}
+}

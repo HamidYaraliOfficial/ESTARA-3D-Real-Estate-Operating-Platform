@@ -1,0 +1,8 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: estara-api-pdb
+  namespace: estara
+spec:
+  minAvailable: 1
+  selector: {matchLabels: {app: estara-api}}

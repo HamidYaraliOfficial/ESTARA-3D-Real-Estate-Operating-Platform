@@ -1,0 +1,2 @@
+import {Injectable} from '@nestjs/common';
+@Injectable() export class SearchService { private endpoint=process.env.OPENSEARCH_URL||'http://localhost:9200'; private index='estara-properties'; async reindexProperty(id:string){return {id,index:this.index,endpoint:this.endpoint,queued:true};} buildFacets(){return ['listingType','propertyType','cityId','neighborhoodId','bedrooms','bathrooms','price','area','amenities','status'];} }
